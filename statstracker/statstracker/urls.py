@@ -19,6 +19,7 @@ from django.views.generic import TemplateView
 from activities import views as act_views
 from rest_framework import routers
 
+
 router = routers.DefaultRouter()
 router.register(r"activities", act_views.ActivitiesViewSet, base_name='activities')
 router.register(r"stats", act_views.StatsViewSet, base_name='stats')
@@ -29,4 +30,6 @@ urlpatterns = [
     url(r'^', include('users.urls')),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace ='rest_framework')),
+    url(r'^api/activities/(?P<pk>\d+)/stats/$', act_views.StatsList.as_view(), name='stats-list'),
+    url(r'^api/stats/(?P<pk>\d+)$', act_views.StatsDetailView.as_view(), name='stats-detail')
 ]
