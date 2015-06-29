@@ -1,3 +1,42 @@
+# Project Structure
+
+Models are implemented as follows:
+
+ - User: built-in model from Django for login accounts
+ - Profile: dual model to User, used to establish relationships with other models
+   + Has a set of activities associated with it
+ - Activity: Something that is counted by-day
+   + Has a set of stats associated with it
+ - Stat: The count of the activity on a given day
+
+App structure:
+
+ - activities
+ - users
+ - api
+
+API urls:
+
+ - /activities/{id}
+   + can perform an action on a single activity
+ - /activities/{id}/stats/
+   + can perform an action on all activity's stats at once
+ - /stats/{id}
+
+## Location of Templates
+
+These are important for the front-end people to know.
+
+ - Main index: /statstracker/templates/index.html
+ - Login page: /statstracker/users/templates/users/registration/login.html
+ - Registration page: /statstracker/users/templates/users/register.html
+
+## Requirements
+
+When doing so manually, requirements should be installed as:
+
+    pip3 install -r dev_requirements.txt
+
 # Welcome to your new Django single-page app project!
 
 This template will ease your way in building a single-page app backed by a Django API.
