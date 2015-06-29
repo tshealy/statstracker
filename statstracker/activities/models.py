@@ -1,16 +1,17 @@
 from django.db import models
-from .users import Profile
+from users.models import Profile
 from datetime import date
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import User, AnonymousUser
 from django.utils import timezone
+import datetime
 
 # Create your models here.
 
 class Activities(models.Model):
-    Profile = models.ForeignKey(Profile)
-    created = models.DateTimeField(default=timezone.now)
+    profile = models.ForeignKey(Profile)
+    creation_date = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255)
     # description = models.CharField(max_length=500, null=True)
 
@@ -19,7 +20,8 @@ class Activities(models.Model):
     #     return self.day_set.count()
 
 class Stats(models.Model):
-    Activities = models.ForeignKey(Activities)
+    activities = models.ForeignKey(Activities)
     stat = models.IntegerField()
-    day = models.DateTimeField(default=timezone.now)
+    date = models.DateField(default=datetime.date.today)
+
 

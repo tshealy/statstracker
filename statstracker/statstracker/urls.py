@@ -20,8 +20,7 @@ from activities import views as act_views
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r"activities", act_views.ActivitiesViewSet, base_name='activites')
-router = routers.DefaultRouter()
+router.register(r"activities", act_views.ActivitiesViewSet, base_name='activities')
 router.register(r"stats", act_views.StatsViewSet, base_name='stats')
 
 urlpatterns = [
