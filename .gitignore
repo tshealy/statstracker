@@ -75,3 +75,4 @@ target/
 .envrc
 .DS_Store
 .idea/
+dev_settings.py

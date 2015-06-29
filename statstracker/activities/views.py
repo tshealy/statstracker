@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions, generics, filters
-from .models import Activities, Date
+from .models import Activities, Stats
 from rest_framework.exceptions import PermissionDenied
 import django_filters
 from django.contrib.auth.models import User
-from .serializers import ActivitiesSerializer, DateSerializer
+from .users import Profile
+from .serializers import ActivitiesSerializer, StatsSerializer
 
 
 class ActivitiesViewSet(viewsets.ModelViewSet):
@@ -15,21 +16,23 @@ class ActivitiesViewSet(viewsets.ModelViewSet):
     #these need fixing
     def get_queryset(self):
         try:
-            activities = Activities.objects.get(id = self.kwargs['pk'])
-            return Activities.objects.filter(user_id = activities.user.id)
+            # profile = Profile.objects.get(id = self.kwargs['pk'])
+            # return Activities.objects.filter(user_id = profile.id)
+            return Activities.objects.filter(user = self.request.user)
         except:
             return "Object not found"
 
 
-class DateViewSet(viewsets.ModelViewSet):
+class StatsViewSet(viewsets.ModelViewSet):
     # queryset= Date.objects.all()
-    serializer_class = DateSerializer
+    serializer_class = StatsSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     #these need fixing
     def get_queryset(self):
         try:
-            dates = Date.objects.get(id = self.kwargs['pk'])
-            return Date.objects.filter(user_id = dates.user.id)
+            # profile = Profile.objects.get(id = self.kwargs['pk'])
+            # return Stats.objects.filter(user_id = profile.id)
+            return Stats.objects.filter(user = self.request.user)
         except:
             return "Object not found"
