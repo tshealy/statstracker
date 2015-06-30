@@ -1,21 +1,76 @@
 {% load staticfiles %}
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-  <meta charset="utf-8">
-  <title>index.html</title>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="static/graph.css">
+    <script src="static/d3.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+$(document).ready(function(){
 
-  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-</head>
+$.ajax({
+    type: 'GET',
+    url: 'api/activities/1/stats/?format=json',
+    data: { get_param: 'activities' },
+    dataType: 'json',
+    success: function (data) { //this success (or somtimes .done) stores the json file as data
+		ary = {};
 
-<body>
+        $.each(data, function(index, element) {
+			$.each(element, function(d, val) {
+				// console.log(d+" : "+val);
+				if (d in ary) {
+					ary[d].push(val);
+				} else {
+					ary[d] = [val];
+				}
+			});
+        });
+		xvals = ary["date"]; // array of days as strings
+		yvals = ary["stat"];
 
-  <h1>Hello world!</h1>
+		// John's method for converting dates into numbers
+		var new_x = [];
+		for (i=0;i<xvals.length;i++) {
+			var john_date = new Date(xvals[i]); // converted days into datetime object array
+			new_x.push( john_date );
+		}
 
-  <script src="{% static 'js/main.js' %}"></script>
-</body>
+		// From Mason's lecture
+		svg = d3.select("svg");
+		g = svg.append("g");
+		g.attr("transform", "translate(100,50)");
 
-</html>
+		// domain is set by the min and max of the lists
+		// x = d3.scale.linear().domain([d3.min(new_x), d3.max(new_x)]).range([0, 800]); // set axis scale in domain
+		y = d3.scale.linear().domain([d3.min(yvals), d3.max(yvals)]).range([400, 0]); // leave range alone
+
+		x = d3.time.scale().domain([d3.min(new_x), d3.max(new_x)]).range([0, 800]); // updated date formatting
+
+		var max_ticks = 5;
+		x_axis = d3.svg.axis().scale(x).orient("bottom").ticks(max_ticks).tickFormat(d3.time.format("%m/%Y"));
+		y_axis = d3.svg.axis().scale(y).orient("left").ticks(4);
+
+		g.call(y_axis);
+
+		gx = g.append("g")
+		gx.call(x_axis);
+		gx.attr("transform", "translate(0,400)");
+
+		g.selectAll("circle")
+	      .data(data)
+	    .enter().append("circle")
+	      .attr("cx", function(d) {
+			var john_date = new Date(d["date"]);
+			return x(john_date);
+		} )
+	      .attr("cy", function(d) {return y(d["stat"]);} )
+	      .attr("r", 10);
+
+
+    }
+});
+});
