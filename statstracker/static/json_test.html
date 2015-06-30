@@ -9,7 +9,7 @@
 <script>
 
 $(document).ready(function(){
-	
+
 $.ajax({
     type: 'GET',
     url: 'http://127.0.0.1:8000/api/activities/2/stats/?format=json',
@@ -29,6 +29,7 @@ $.ajax({
 			});
         });
 		xvals = ary["date"]; // array of days as strings
+		yvals = ary["stat"];
 
 		// John's method for converting dates into numbers
 		var new_x = [];
