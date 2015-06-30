@@ -15,14 +15,22 @@ $.ajax({
     data: { get_param: 'activities' },
     dataType: 'json',
     success: function (data) {
-		// ary = {};
+		ary = {};
+
         $.each(data, function(index, element) {
 			$.each(element, function(d, val) {
 				console.log(d+" : "+val);
-				// ary[d].push(val);
+				if (d in ary) {
+					ary[d].push(val);
+				} else {
+					ary[d] = [val];
+				}
 			});
         });
-		// console.log(ary);
+		xvals = ary["date"];
+		yvals = ary["stat"];
+		console.log(xvals);
+		console.log(yvals);
     }
 });
     // $.get("http://127.0.0.1:8000/api/activities/2/stats/?format=json", function(data, status){
