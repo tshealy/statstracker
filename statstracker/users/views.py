@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 # Create your views here.
@@ -49,3 +49,7 @@ def user_register(request):
 									user.username))
 			return redirect('view_index')
 	return render(request, "users/register.html", {'user_form': user_form})
+
+def our_logout(request):
+	logout(request)
+	return redirect('view_index')
