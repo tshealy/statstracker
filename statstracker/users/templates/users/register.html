@@ -12,14 +12,22 @@
 </head>
 <body>
 
+    {% if request.user.is_authenticated %}
+
+        <p>Please <a href="{% url 'view_logout' %}">logout</a> in order to make a new
+            account</p>
+
+    {% else %}
 
     <h2>Register</h2>
 
     <form method="POST" action="{% url 'view_register' %}">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        <input type="submit" name="submit" value="Register"/>
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    <input type="submit" name="submit" value="Register"/>
     </form>
+
+    {% endif %}
 
     </body>
     </html>

@@ -15,6 +15,10 @@ class ActivitiesViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Activities.objects.filter(profile__user=self.request.user)
 
+    def perform_create(self, serializer):
+        prof = self.request.user.profile
+        serializer.save(profile=prof)
+
 
 
 class StatsViewSet(viewsets.ModelViewSet):
