@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+
+$(document).ready(function(){
+   // jQuery methods go here...
+	// $( "#result" )
+$.ajax({
+    type: 'GET',
+    url: 'http://127.0.0.1:8000/api/activities/2/stats/?format=json',
+    data: { get_param: 'activities' },
+    dataType: 'json',
+    success: function (data) {
+		// ary = {};
+        $.each(data, function(index, element) {
+			$.each(element, function(d, val) {
+				console.log(d+" : "+val);
+				// ary[d].push(val);
+			});
+        });
+		// console.log(ary);
+    }
+});
+    // $.get("http://127.0.0.1:8000/api/activities/2/stats/?format=json", function(data, status){
+    //     alert("Data: " + data + "\nStatus: " + status);
+	// 	// $.each(data.activities,
+	// 	// 	function(i, object) {
+	// 	// 		alert(i + " ... " + object);
+	//     //         // $.each(object, function(property, value) {
+	//     //         // 	alert(property + "=" + value);
+	// 	// 	    // });
+	// 	// 	}
+	// 	// );
+    // });
+	// $.ajax( {
+	// 	url: "http://127.0.0.1:8000/api/activities/2/stats/",
+	// 	type: "GET",
+	// 	datatype: "json",
+	// 	success: function() { alert( "Load was performed." ); },
+	//     error: function(xhr, status) { alert('Sorry, there was a problem!');},
+	//     complete: function(xhr, status) {},
+	// });
+});
+
+
+
+</script>
+</head>
+
+<body>
+hi world
+
+<div id="result">This is a box!</div>
+
+</body>
+
+</html>
