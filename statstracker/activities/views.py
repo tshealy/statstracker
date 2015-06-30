@@ -30,13 +30,21 @@ class StatsViewSet(viewsets.ModelViewSet):
 
 
 
-class StatsList(generics.ListCreateAPIView):
+class StatsList(generics.ListCreateAPIView): # /activities/pk/stats/
     # queryset = Stats.objects.all()
     serializer_class = StatsSerializer
 
     def get_queryset(self):
         activitypk = self.kwargs['pk']
-        return Stats.objects.filter(activities__pk=activitypk)
+        user = self.request.user
+        stat_list = Stats.objects.filter(activities__pk=activitypk)
+        return stat_list
+
+
+    def perform_create(self, serializer):
+        act = Activities.objects.get(pk=self.kwargs['pk'])
+        serializer.save(activities=act)
+
 
 
 class StatsDetailView(generics.RetrieveUpdateDestroyAPIView):

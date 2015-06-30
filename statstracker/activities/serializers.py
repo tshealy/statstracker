@@ -21,7 +21,9 @@ class ActivitiesSerializer(serializers.ModelSerializer):
 
 
 class StatsSerializer(serializers.ModelSerializer):
-    activities = serializers.PrimaryKeyRelatedField
+    activities = serializers.PrimaryKeyRelatedField(read_only=True)
+    date = serializers.DateField(input_formats=['%Y-%m-%d'])
+    #input_formats=['%d/%m/%Y']) # YYYY[-MM[-DD]] # format=['iso-8601']
 
     class Meta:
         model = Stats
