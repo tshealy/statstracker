@@ -1,3 +1,157 @@
-h1 {
-  color: red;
-}
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  background-color: #e9e0d7;
+  font-family: sans-serif; }
+
+.page-header {
+  background-color: #354459;
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0; }
+
+.page-header h1 {
+  color: #e9e0d7;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 32px; }
+
+.add-new {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  -webkit-transform: translate(50%, -60%);
+  transform: translate(50%, -60%);
+  cursor: pointer; }
+
+.add-new a {
+  text-decoration: none;
+  color: #e9e0d7;
+  font-size: 42px; }
+
+.home {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  cursor: pointer; }
+
+.home a {
+  text-decoration: none;
+  color: #e9e0d7;
+  font-size: 30px;
+  font-family: untitled-font-1; }
+
+.form-container {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 50px;
+  position: relative;
+  padding-top: 50px; }
+
+.form-container h1 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  font-family: sans-serif;
+  line-height: 1.4em; }
+
+.login-form input {
+  width: 80%;
+  padding: 15px 0;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: block;
+  margin-top: 30px;
+  outline: none;
+  border: 1px solid #354459;
+  font-size: 20px;
+  padding-left: 20px; }
+
+.submit-btn {
+  width: 80%;
+  padding: 15px 0;
+  display: block;
+  margin: 30px auto;
+  cursor: pointer;
+  color: #354459;
+  font-size: 18px; }
+
+.submit-btn:hover {
+  background-color: #354459;
+  color: #e9e0d7; }
+
+.login-form input:focus {
+  box-shadow: 0 0 5px rgba(204, 0, 0, 0.6); }
+
+.input {
+  display: block;
+  position: relative; }
+
+.input-box {
+  text-align: left;
+  color: #333; }
+
+.focus-out {
+  position: absolute;
+  top: 15px;
+  left: 50px;
+  z-index: 100;
+  color: #999;
+  font-size: 20px;
+  transition: 0.25s all ease; }
+
+.focus-in {
+  position: absolute;
+  top: 5px;
+  z-index: 100;
+  font-size: 12px;
+  transition: 0.25s all ease; }
