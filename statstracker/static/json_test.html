@@ -3,12 +3,13 @@
 
 <head>
 	<meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="graph.css">
+    <script src="d3.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
 
 $(document).ready(function(){
    // jQuery methods go here...
-	// $( "#result" )
 $.ajax({
     type: 'GET',
     url: 'http://127.0.0.1:8000/api/activities/2/stats/?format=json',
@@ -19,7 +20,7 @@ $.ajax({
 
         $.each(data, function(index, element) {
 			$.each(element, function(d, val) {
-				console.log(d+" : "+val);
+				// console.log(d+" : "+val);
 				if (d in ary) {
 					ary[d].push(val);
 				} else {
@@ -29,29 +30,46 @@ $.ajax({
         });
 		xvals = ary["date"];
 		yvals = ary["stat"];
-		console.log(xvals);
-		console.log(yvals);
+
+		// John's method for converting dates into numbers
+		var new_x = [];
+		for (i=0;i<xvals.length;i++) {
+			console.log(xvals[i]);
+			var john_date = new Date(xvals[i]);
+			new_x.push( john_date );
+		}
+		console.log(xvals); // array of days as strings
+		console.log(yvals); // array of stat counts
+		console.log(new_x); // converted days into datetime object array
+		$("#result").text(xvals);
+
+		// From Mason's lecture
+		svg = d3.select("svg");
+		g = svg.append("g");
+		g.attr("transform", "translate(100,50)");
+
+		console.log(d3.min(xvals)) // this is a way to get min/max of a list
+		x = d3.scale.linear().domain([0, 30]).range([0, 800]); // set axis scale in domain
+		y = d3.scale.linear().domain([0, 30]).range([400, 0]); // leave range alone
+
+		x_axis = d3.svg.axis().scale(x).orient("bottom").ticks(5).tickFormat(d3.format("d"));
+		y_axis = d3.svg.axis().scale(y).orient("left").ticks(4);
+
+		g.call(y_axis);
+
+		gx = g.append("g")
+		gx.call(x_axis);
+		gx.attr("transform", "translate(0,400)");
+
+		var circ = g.selectAll("circle");
+		circ.enter().append("circle") // it might need more calls on this, I'm lost
+			.attr("cx", new_x ) // I don't know if this is the right format
+			.attr("cy", yvals )
+			.attr("r", 10);
+
+
     }
 });
-    // $.get("http://127.0.0.1:8000/api/activities/2/stats/?format=json", function(data, status){
-    //     alert("Data: " + data + "\nStatus: " + status);
-	// 	// $.each(data.activities,
-	// 	// 	function(i, object) {
-	// 	// 		alert(i + " ... " + object);
-	//     //         // $.each(object, function(property, value) {
-	//     //         // 	alert(property + "=" + value);
-	// 	// 	    // });
-	// 	// 	}
-	// 	// );
-    // });
-	// $.ajax( {
-	// 	url: "http://127.0.0.1:8000/api/activities/2/stats/",
-	// 	type: "GET",
-	// 	datatype: "json",
-	// 	success: function() { alert( "Load was performed." ); },
-	//     error: function(xhr, status) { alert('Sorry, there was a problem!');},
-	//     complete: function(xhr, status) {},
-	// });
 });
 
 
@@ -63,6 +81,32 @@ $.ajax({
 hi world
 
 <div id="result">This is a box!</div>
+
+<h2>D3 Graphing Tool</h2>
+
+<p id="intro">
+Although this tool doesn't do much
+<span class="muted">(yet)</span>,
+pretty soon it's going to take the world by storm
+<span class="muted">(trust us)</span>.
+</p>
+
+<svg id="graph">
+</svg>
+
+<!-- <script src="graph.js"></script> -->
+
+<style>
+
+.chart div {
+font: 10px sans-serif;
+background-color: steelblue;
+text-align: right;
+padding: 3px;
+margin: 1px;
+color: white;
+}
+</style>
 
 </body>
 
