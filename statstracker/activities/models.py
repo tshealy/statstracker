@@ -14,12 +14,14 @@ class Activities(models.Model):
     creation_date = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.title
+
 
 class Stats(models.Model):
     activities = models.ForeignKey(Activities)
     stat = models.IntegerField()
     date = models.DateField(default=datetime.date.today)
 
-
-
-
+    def __str__(self):
+        return str(self.date)

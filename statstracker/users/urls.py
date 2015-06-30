@@ -21,7 +21,8 @@ urlpatterns = [
     url(r'^register/$', users_views.user_register, name="view_register"),
     # url(r'^edit/', users_views.edit_profile, name="view_profile"),
     url(r'^login/$',  'django.contrib.auth.views.login',  name='view_login'),
-    url(r'^logout/$', 'django.contrib.auth.views.logout', name='view_logout'),
+    # url(r'^logout/$', 'django.contrib.auth.views.logout', name='view_logout'),
+    url(r'^logout/$', users_views.our_logout, name='view_logout'),
     url(r'^password_reset/$', 'django.contrib.auth.views.password_reset', name='password_reset'),
     url(r'^accounts/profile', RedirectView.as_view(
                                 pattern_name='view_index'
