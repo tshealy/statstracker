@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="graph.css">
+    <script src="d3.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+
+$(document).ready(function(){
+
+$.ajax({
+    type: 'GET',
+    url: 'http://127.0.0.1:8000/api/activities/2/stats/?format=json',
+    data: { get_param: 'activities' },
+    dataType: 'json',
+    success: function (data) {
+		ary = {};
+
+        $.each(data, function(index, element) {
+			$.each(element, function(d, val) {
+				// console.log(d+" : "+val);
+				if (d in ary) {
+					ary[d].push(val);
+				} else {
+					ary[d] = [val];
+				}
+			});
+        });
+		xvals = ary["date"]; // array of days as strings
+		yvals = ary["stat"];
+
+		// John's method for converting dates into numbers
+		var new_x = [];
+		for (i=0;i<xvals.length;i++) {
+			var john_date = new Date(xvals[i]); // converted days into datetime object array
+			new_x.push( john_date );
+		}
+
+		// From Mason's lecture
+		svg = d3.select("svg");
+		g = svg.append("g");
+		g.attr("transform", "translate(100,50)");
+
+		// domain is set by the min and max of the lists
+		// x = d3.scale.linear().domain([d3.min(new_x), d3.max(new_x)]).range([0, 800]); // set axis scale in domain
+		y = d3.scale.linear().domain([d3.min(yvals), d3.max(yvals)]).range([400, 0]); // leave range alone
+
+		x = d3.time.scale().domain([d3.min(new_x), d3.max(new_x)]).range([0, 800]); // updated date formatting
+
+		var max_ticks = 5;
+		x_axis = d3.svg.axis().scale(x).orient("bottom").ticks(max_ticks).tickFormat(d3.time.format("%m/%Y"));
+		y_axis = d3.svg.axis().scale(y).orient("left").ticks(4);
+
+		g.call(y_axis);
+
+		gx = g.append("g")
+		gx.call(x_axis);
+		gx.attr("transform", "translate(0,400)");
+
+		g.selectAll("circle")
+	      .data(data)
+	    .enter().append("circle")
+	      .attr("cx", function(d) {
+			var john_date = new Date(d["date"]);
+			return x(john_date);
+		} )
+	      .attr("cy", function(d) {return y(d["stat"]);} )
+	      .attr("r", 10);
+
+
+    }
+});
+});
+
+
+
+</script>
+</head>
+
+<body>
+hi world
+
+<div id="result">This is a box!</div>
+
+<h2>D3 Graphing Tool</h2>
+
+<p id="intro">
+Although this tool doesn't do much
+<span class="muted">(yet)</span>,
+pretty soon it's going to take the world by storm
+<span class="muted">(trust us)</span>.
+</p>
+
+<svg id="graph">
+</svg>
+
+<!-- <script src="graph.js"></script> -->
+
+<style>
+
+.chart div {
+font: 10px sans-serif;
+background-color: steelblue;
+text-align: right;
+padding: 3px;
+margin: 1px;
+color: white;
+}
+</style>
+
+</body>
+
+</html>
