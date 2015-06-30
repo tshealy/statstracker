@@ -9,7 +9,7 @@
 <script>
 
 $(document).ready(function(){
-   // jQuery methods go here...
+	
 $.ajax({
     type: 'GET',
     url: 'http://127.0.0.1:8000/api/activities/2/stats/?format=json',
@@ -28,20 +28,14 @@ $.ajax({
 				}
 			});
         });
-		xvals = ary["date"];
-		yvals = ary["stat"];
+		xvals = ary["date"]; // array of days as strings
 
 		// John's method for converting dates into numbers
 		var new_x = [];
 		for (i=0;i<xvals.length;i++) {
-			console.log(xvals[i]);
-			var john_date = new Date(xvals[i]);
+			var john_date = new Date(xvals[i]); // converted days into datetime object array
 			new_x.push( john_date );
 		}
-		console.log(xvals); // array of days as strings
-		console.log(yvals); // array of stat counts
-		console.log(new_x); // converted days into datetime object array
-		$("#result").text(xvals);
 
 		// From Mason's lecture
 		svg = d3.select("svg");
@@ -67,7 +61,6 @@ $.ajax({
 	      .attr("cx", function(d) {
 			var john_date = new Date(d["date"]);
 			return x(john_date);
-			// return x(d["date"]);
 		} )
 	      .attr("cy", function(d) {return y(d["stat"]);} )
 	      .attr("r", 10);
