@@ -49,7 +49,8 @@ $.ajax({
 
 		x = d3.time.scale().domain([d3.min(new_x), d3.max(new_x)]).range([0, 800]); // updated date formatting
 
-		x_axis = d3.svg.axis().scale(x).orient("bottom").ticks(5).tickFormat(d3.format("y"));
+		var max_ticks = 5;
+		x_axis = d3.svg.axis().scale(x).orient("bottom").ticks(max_ticks).tickFormat(d3.time.format("%m/%Y"));
 		y_axis = d3.svg.axis().scale(y).orient("left").ticks(4);
 
 		g.call(y_axis);
