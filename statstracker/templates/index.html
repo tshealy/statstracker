@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 $.ajax({
     type: 'GET',
-    url: 'api/activities/1/stats/?format=json',
+    url: 'api/activities/3/stats/?format=json',
     data: { get_param: 'activities' },
     dataType: 'json',
     success: function (data) { //this success (or somtimes .done) stores the json file as data
@@ -74,3 +74,42 @@ $.ajax({
     }
 });
 });
+
+
+</script>
+</head>
+
+<body>
+hi world
+
+<div id="result">This is a box!</div>
+
+<h2>D3 Graphing Tool</h2>
+
+<p id="intro">
+Although this tool doesn't do much
+<span class="muted">(yet)</span>,
+pretty soon it's going to take the world by storm
+<span class="muted">(trust us)</span>.
+</p>
+
+<svg id="graph">
+</svg>
+
+<!-- <script src="graph.js"></script> -->
+
+<style>
+
+.chart div {
+font: 10px sans-serif;
+background-color: steelblue;
+text-align: right;
+padding: 3px;
+margin: 1px;
+color: white;
+}
+</style>
+
+</body>
+
+</html>
