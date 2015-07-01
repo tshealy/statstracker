@@ -50,21 +50,25 @@ $.ajax({
 		g = svg.append("g");
 		g.attr("transform", "translate(100,50)");
 
+		var width = 400;
+		var height = 200;
+
 		// domain is set by the min and max of the lists
 		// x = d3.scale.linear().domain([d3.min(new_x), d3.max(new_x)]).range([0, 800]); // set axis scale in domain
-		y = d3.scale.linear().domain([0, d3.max(yvals)]).range([400, 0]); // leave range alone
+		y = d3.scale.linear().domain([0, d3.max(yvals)]).range([height, 0]); // leave range alone
 
-		x = d3.time.scale().domain([d3.min(new_x), d3.max(new_x)]).range([0, 800]); // updated date formatting
+		x = d3.time.scale().domain([d3.min(new_x), d3.max(new_x)]).range([0, width]); // updated date formatting
 
 		var max_ticks = 5;
-		x_axis = d3.svg.axis().scale(x).orient("bottom").ticks(max_ticks).tickFormat(d3.time.format("%m/%Y"));
+		x_axis = d3.svg.axis().scale(x).orient("bottom").ticks(max_ticks).tickFormat(d3.time.format("%m/%d"));
 		y_axis = d3.svg.axis().scale(y).orient("left").ticks(4);
 
 		g.call(y_axis);
 
 		gx = g.append("g")
 		gx.call(x_axis);
-		gx.attr("transform", "translate(0,400)");
+		console.log("transform", "translate(0,"+height+")");
+		gx.attr("transform", "translate(0,"+height+")");
 
 		g.selectAll("circle")
 	      .data(data)
@@ -109,9 +113,10 @@ color: white;
     </div>
   </header>
 
+	<svg id="graph"></svg>
+
   <div class="main-content">
 
-	<svg id="graph"></svg>
 
   </div>
 
