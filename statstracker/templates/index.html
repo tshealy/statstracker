@@ -46,7 +46,7 @@ $.ajax({
 
 		// domain is set by the min and max of the lists
 		// x = d3.scale.linear().domain([d3.min(new_x), d3.max(new_x)]).range([0, 800]); // set axis scale in domain
-		y = d3.scale.linear().domain([d3.min(yvals), d3.max(yvals)]).range([400, 0]); // leave range alone
+		y = d3.scale.linear().domain([0, d3.max(yvals)]).range([400, 0]); // leave range alone
 
 		x = d3.time.scale().domain([d3.min(new_x), d3.max(new_x)]).range([0, 800]); // updated date formatting
 
