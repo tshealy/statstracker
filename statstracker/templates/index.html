@@ -7,6 +7,12 @@
     <link rel="stylesheet" type="text/css" href="static/graph.css">
     <script src="static/d3.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+	  <title>Stats Tracking</title>
+
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+	  <link href="https://fontastic.s3.amazonaws.com/Cez3KECLTfVWYyJGtXZ3XW/icons.css" rel="stylesheet">
 <script>
 
 $(document).ready(function(){
@@ -77,26 +83,6 @@ $.ajax({
 
 
 </script>
-</head>
-
-<body>
-hi world
-
-<div id="result">This is a box!</div>
-
-<h2>D3 Graphing Tool</h2>
-
-<p id="intro">
-Although this tool doesn't do much
-<span class="muted">(yet)</span>,
-pretty soon it's going to take the world by storm
-<span class="muted">(trust us)</span>.
-</p>
-
-<svg id="graph">
-</svg>
-
-<!-- <script src="graph.js"></script> -->
 
 <style>
 
@@ -109,6 +95,29 @@ margin: 1px;
 color: white;
 }
 </style>
+
+</head>
+
+<body>
+  <header class="page-header">
+    <div class="home">
+      <a href=""> n </a>
+    </div>
+    <h1>Stat Tracker</h1>
+    <div class="add-new">
+      <a href="#new-activity"> + </a>
+    </div>
+  </header>
+
+  <div class="main-content">
+
+	<svg id="graph"></svg>
+
+  </div>
+
+  <script src="{% static 'js/vendor.js' %}"></script>
+  <script src="{% static 'js/views.js' %}"></script>
+  <script src="{% static 'js/app.js' %}"></script>
 
 </body>
 
