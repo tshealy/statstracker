@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 $.ajax({
     type: 'GET',
-    url: 'api/activities/3/stats/?format=json',
+    url: '/api/activities/3/stats/?format=json',
     data: { get_param: 'activities' },
     dataType: 'json',
     success: function (data) { //this success (or somtimes .done) stores the json file as data

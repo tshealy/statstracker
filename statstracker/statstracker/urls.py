@@ -26,6 +26,7 @@ router.register(r"stats", act_views.StatsViewSet, base_name='stats')
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^graph.html$', TemplateView.as_view(template_name="graph.html"), name='view_graph'),
     url(r'^$', TemplateView.as_view(template_name="index.html"), name='view_index'),
     url(r'^', include('users.urls')),
     url(r'^api/', include(router.urls)),
