@@ -1,0 +1,76 @@
+.form-container {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 50px;
+  position: relative;
+  padding-top: 50px;
+}
+
+.form-container h1 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  font-family: sans-serif;
+  line-height: 1.4em;
+}
+
+.login-form input {
+  width: 80%;
+  padding: 15px 0;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: block;
+  margin-top: 30px;
+  outline: none;
+  border: 1px solid #354459;
+  font-size: 20px;
+  padding-left: 20px;
+}
+
+.submit-btn {
+  width: 80%;
+  padding: 15px 0;
+  display: block;
+  margin: 30px auto;
+  cursor: pointer;
+  color: #354459;
+  font-size: 18px;
+}
+
+.submit-btn:hover {
+  background-color: #354459;
+  color: #e9e0d7;
+}
+
+.login-form input:focus {
+  box-shadow: 0 0 5px rgba(204, 0, 0, 0.6);
+}
+
+.input {
+  display: block;
+  position: relative;
+}
+
+.input-box {
+  text-align: left;
+  color: #333;
+}
+
+.focus-out {
+  position: absolute;
+  top: 15px;
+  left: 50px;
+  z-index: 100;
+  color: #999;
+  font-size: 20px;
+  transition: 0.25s all ease;
+}
+
+.focus-in {
+  position: absolute;
+  top: 5px;
+  z-index: 100;
+  font-size: 12px;
+  transition: 0.25s all ease;
+}
